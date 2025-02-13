@@ -4,20 +4,21 @@ package Unrunable;
 
 public class Episode {
 
-    private String title;           // Episodens tittel
     private int episodeNumber;   // Episodens nummer i sesongen
     private int seasonNumber;    // Nummeret på sesongen episoden er fra
-    private int runtime;            // Episodens spilletid i minutter
+    private String title;
+    private int runtime;
 
 
 
     // CONSTRUCTORS
 
-    public Episode (String title, int episodeNumber, int seasonNumber, int runtime) {
+    public Episode (String title, int runtime, int episodeNumber, int seasonNumber) {
         this.title = title;
+        this.runtime = runtime;
         this.episodeNumber = episodeNumber;
         this.seasonNumber = seasonNumber;
-        this.runtime = runtime;
+
     }
 
     public Episode (String title, int episodeNumber, int seasonNumber) {
