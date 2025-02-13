@@ -11,6 +11,8 @@ public class TVSeries {
     private String description;     // En beskrivelse av TV-serien
     private LocalDate releaseDate;  // TV-seriens utgivelsesdato
     private ArrayList<Episode> episodes = new ArrayList<>();     // epiosder i serien
+    private int averageRunTime;
+    private int numSeasons;
 
 
 
@@ -40,7 +42,7 @@ public class TVSeries {
     public ArrayList<Episode> getEpisodesInSeason(int season) {
         ArrayList<Episode> episodesFromSeason = new ArrayList<>();
         for (int i = 0; i < episodes.size(); i++) {
-            if episodes.get(i).getSeasonNumber() == season {
+            if (episodes.get(i).getSeasonNumber() == season) {
                 episodesFromSeason.add(episodes.get(i));
             }
         }
@@ -48,8 +50,29 @@ public class TVSeries {
     }
 
 
+    // Oppgave 2.1 - Modellklasser // Oppgave 2.7 - Holde på antall sesonger
     public void addEpisode(Episode episode) {
-        this.episodes.add(episode);
+        if (episode.getSeasonNumber() - 1 > getNumSeasons()) {
+            System.out.println("Error - season out of bound");
+        }
+        else if (episode.getSeasonNumber() - 1 == getNumSeasons()) {
+            this.numSeasons += 1;
+            this.episodes.add(episode);
+            updateAverageRuntime();
+        }
+        else {
+            this.episodes.add(episode);
+            updateAverageRuntime();
+        }
+    }
+
+    // Oppgave 2.5 - Gjennomsnittlig spilletid
+    private void updateAverageRuntime() {
+        int totalRuntime = 0;
+        for (int i = 0; i < episodes.size(); i++) {
+            totalRuntime += episodes.get(i).getRuntime();
+        }
+        this.averageRunTime = totalRuntime / episodes.size();
     }
 
 
@@ -85,5 +108,13 @@ public class TVSeries {
 
     public void setEpisode(ArrayList<Episode> episodes) {
         this.episodes = episodes;
+    }
+
+    public int getAverageRunTime() {
+        return averageRunTime;
+    }
+
+    public int getNumSeasons() {
+        return numSeasons;
     }
 }
