@@ -23,7 +23,7 @@ public class Oblig2Main {
             int epCounter = 1;
             while (epCounter < 11) {
                 String currentEpisodeName = "GoT_S" + seasonCounter + "E" + epCounter;
-                Episode ep = new Episode(currentEpisodeName,epCounter,seasonCounter,new Random().nextInt(20, 30));
+                Episode ep = new Episode(currentEpisodeName,new Random().nextInt(20, 30),epCounter,seasonCounter);
                 GameOfThrones.addEpisode(ep);
                 epCounter++;
             }
